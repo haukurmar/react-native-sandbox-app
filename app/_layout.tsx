@@ -30,6 +30,12 @@ export default function RootLayout() {
 						title: "",
 					}}
 				/>
+				<Stack.Screen
+					name="+not-found"
+					options={{
+						title: "Oops! Page not found",
+					}}
+				/>
 			</Stack>
 		</QueryClientProvider>
 	);
