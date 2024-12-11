@@ -1,6 +1,13 @@
 import { PersonCard } from "@app/components/PersonCard";
 import { useFetchUsers } from "@app/users";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { Link } from "expo-router";
+import {
+	ScrollView,
+	StyleSheet,
+	Text,
+	TouchableOpacity,
+	View,
+} from "react-native";
 
 const HomeScreen = () => {
 	const { data, isLoading } = useFetchUsers();
@@ -12,7 +19,15 @@ const HomeScreen = () => {
 			) : (
 				<ScrollView>
 					{data?.map((user) => (
-						<PersonCard key={user.id} data={user} />
+						<Link
+							href={`/users/${user.id}`}
+							key={user.id}
+							asChild={true}
+						>
+							<TouchableOpacity>
+								<PersonCard data={user} />
+							</TouchableOpacity>
+						</Link>
 					))}
 				</ScrollView>
 			)}

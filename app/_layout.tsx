@@ -19,9 +19,15 @@ export default function RootLayout() {
 				}}
 			>
 				<Stack.Screen
-					name="Index"
+					name="index"
 					options={{
 						title: "Home page",
+					}}
+				/>
+				<Stack.Screen
+					name="users/[id]"
+					options={{
+						title: "",
 					}}
 				/>
 			</Stack>
