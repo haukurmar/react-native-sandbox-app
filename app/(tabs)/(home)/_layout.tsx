@@ -1,4 +1,5 @@
 import { Stack } from "expo-router";
+import { getColor } from "@app/ui";
 
 // Create a QueryClient instance
 
@@ -7,19 +8,20 @@ export default function HomeLayout() {
 		<Stack
 			screenOptions={{
 				headerStyle: {
-					backgroundColor: "#880e5d",
+					backgroundColor: getColor("brand", 500),
 				},
-				headerTintColor: "#fff",
+				headerTintColor: getColor("common", "white"),
 				headerTitleStyle: {
 					fontWeight: "500",
 				},
+				headerShadowVisible: false,
 			}}
 		>
 			<Stack.Screen
 				name="index"
 				options={{
 					headerShown: true,
-					title: "Home Page",
+					title: "Home",
 				}}
 			/>
 		</Stack>

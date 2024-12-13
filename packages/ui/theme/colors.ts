@@ -1,29 +1,29 @@
 const colors = {
-	// Main brand color - Purple
+	// Main brand color - Softer Purple
 	brand: {
-		50: "#f3e6ff",
-		100: "#e5ccff",
-		200: "#cc99ff",
-		300: "#b366ff",
-		400: "#9933ff",
-		500: "#8000ff", // Primary brand color
-		600: "#6600cc",
-		700: "#4d0099",
-		800: "#330066",
-		900: "#1a0033",
+		50: "#f5f3ff",
+		100: "#ede9fe",
+		200: "#ddd6fe",
+		300: "#c4b5fd",
+		400: "#a78bfa",
+		500: "#8b5cf6", // Primary brand color
+		600: "#7c3aed",
+		700: "#6d28d9",
+		800: "#5b21b6",
+		900: "#4c1d95",
 	},
-	// Accent color - Teal
+	// Accent color - Softer Teal
 	accent: {
-		50: "#e6fff9",
-		100: "#b3fff0",
-		200: "#80ffe7",
-		300: "#4dffde",
-		400: "#1affd5",
-		500: "#00e6be", // Primary accent color
-		600: "#00b394",
-		700: "#00806a",
-		800: "#004d40",
-		900: "#001a15",
+		50: "#f0fdfa",
+		100: "#ccfbf1",
+		200: "#99f6e4",
+		300: "#5eead4",
+		400: "#2dd4bf",
+		500: "#14b8a6", // Primary accent color
+		600: "#0d9488",
+		700: "#0f766e",
+		800: "#115e59",
+		900: "#134e4a",
 	},
 	// Neutral colors
 	neutral: {

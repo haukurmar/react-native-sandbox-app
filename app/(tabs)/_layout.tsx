@@ -7,14 +7,21 @@ export default function TabsLayout() {
 		<Tabs
 			screenOptions={{
 				tabBarStyle: {
-					backgroundColor: getColor("neutral", 800),
-					borderTopColor: getColor("neutral", 900),
+					backgroundColor: getColor("neutral", 50),
+					borderTopColor: getColor("neutral", 300),
+					borderTopWidth: 1,
+					borderBottomColor: getColor("neutral", 200),
+					borderBottomWidth: 1,
 					height: 65,
 					paddingBottom: 8,
 					paddingTop: 8,
 				},
-				tabBarActiveTintColor: getColor("brand", 300),
+				tabBarActiveTintColor: getColor("brand", 500),
 				tabBarInactiveTintColor: getColor("neutral", 400),
+				headerStyle: {
+					backgroundColor: getColor("neutral", 50),
+				},
+				headerShadowVisible: false,
 			}}
 		>
 			<Tabs.Screen
