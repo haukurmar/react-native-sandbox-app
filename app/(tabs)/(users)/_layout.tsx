@@ -1,18 +1,16 @@
 import { Stack, useRouter } from "expo-router";
-import { getColor } from "@app/ui";
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
+import { getColor } from "@app/ui";
 
-export default function UsersLayout() {
+const UsersLayout = () => {
 	const router = useRouter();
-
 	return (
 		<Stack
 			screenOptions={{
-				headerShown: false,
 				headerStyle: {
-					backgroundColor: getColor("brand", 500),
+					backgroundColor: "#6b13c0",
 				},
-				headerTintColor: getColor("common", "white"),
+				headerTintColor: "#fff",
 				headerTitleStyle: {
 					fontWeight: "500",
 				},
@@ -34,15 +32,18 @@ export default function UsersLayout() {
 			<Stack.Screen
 				name="users/modal/email"
 				options={{
-					title: "Send Email",
 					presentation: "modal",
-					headerStyle: {
-						backgroundColor: "#fff",
-					},
-					headerTintColor: getColor("neutral", 900),
+					headerTitle: "Contact Form",
 					headerLeft: () => (
 						<TouchableOpacity onPress={() => router.back()}>
-							<Text style={styles.headerButton}>Cancel</Text>
+							<Text
+								style={[
+									styles.headerButton,
+									styles.cancelButton,
+								]}
+							>
+								Cancel
+							</Text>
 						</TouchableOpacity>
 					),
 					headerRight: () => (
@@ -60,14 +61,20 @@ export default function UsersLayout() {
 			/>
 		</Stack>
 	);
-}
+};
 
 const styles = StyleSheet.create({
 	headerButton: {
 		fontSize: 17,
-		color: getColor("brand", 500),
+		padding: 8,
+	},
+	cancelButton: {
+		color: "#fff",
 	},
 	sendButton: {
+		color: "#fff",
 		fontWeight: "600",
 	},
 });
+
+export default UsersLayout;
