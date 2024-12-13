@@ -1,6 +1,7 @@
 import type { User } from "../userTypes";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { format, parseISO } from "date-fns";
 
 type PersonCardDetailsProps = {
 	data: User;
@@ -13,12 +14,17 @@ const PersonCardDetails = (props: PersonCardDetailsProps) => {
 		<View style={styles.card}>
 			<View style={styles.header}>
 				{user.imageUrl ? (
-					<Image source={{ uri: user.imageUrl }} style={styles.image} />
+					<Image
+						source={{ uri: user.imageUrl }}
+						style={styles.image}
+					/>
 				) : (
 					<View style={[styles.image, styles.placeholderImage]} />
 				)}
 				<View style={styles.headerContent}>
-					<Text style={styles.name}>{user.firstName} {user.lastName}</Text>
+					<Text style={styles.name}>
+						{user.firstName} {user.lastName}
+					</Text>
 					<Text style={styles.username}>@{user.username}</Text>
 				</View>
 			</View>
@@ -48,8 +54,14 @@ const PersonCardDetails = (props: PersonCardDetailsProps) => {
 				<View style={styles.section}>
 					<Text style={styles.sectionTitle}>Personal</Text>
 					<View style={styles.contactItem}>
-						<Ionicons name="calendar-outline" size={20} color="#666" />
-						<Text style={styles.contactText}>{user.dateOfBirth}</Text>
+						<Ionicons
+							name="calendar-outline"
+							size={20}
+							color="#666"
+						/>
+						<Text style={styles.contactText}>
+							{format(parseISO(user.dateOfBirth), "d. MMMM yyyy")}
+						</Text>
 					</View>
 				</View>
 			)}
@@ -61,7 +73,7 @@ const styles = StyleSheet.create({
 	card: {
 		backgroundColor: "#fff",
 		borderRadius: 16,
-		padding: 16,
+		padding: 24,
 		margin: 16,
 		shadowColor: "#000",
 		shadowOffset: { width: 0, height: 4 },

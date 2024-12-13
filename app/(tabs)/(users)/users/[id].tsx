@@ -1,4 +1,4 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, ScrollView } from "react-native";
 import { useLocalSearchParams, useNavigation } from "expo-router";
 import { useFetchSingleUser, PersonCardDetails } from "@app/users";
 import { LoadingSpinner, ErrorMessage } from "@app/ui";
@@ -27,7 +27,9 @@ const DetailUserPage = () => {
 
 	return (
 		<View style={styles.container}>
-			<PersonCardDetails data={user} />
+			<ScrollView contentContainerStyle={styles.scrollContent}>
+				<PersonCardDetails data={user} />
+			</ScrollView>
 		</View>
 	);
 };
@@ -36,6 +38,10 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: "#f5f5f5",
+	},
+	scrollContent: {
+		flexGrow: 1,
+		paddingBottom: 24,
 	},
 });
 
