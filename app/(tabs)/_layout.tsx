@@ -4,27 +4,37 @@ import CustomTabBar from "../components/CustomTabBar";
 const TabsLayout = () => {
   return (
     <Tabs
-      tabBar={(props) => <CustomTabBar {...props} />}
       screenOptions={{
-        headerShown: false,
+        headerStyle: {
+          backgroundColor: "#6b13c0",
+        },
+        headerTintColor: "#fff",
+        headerTitleStyle: {
+          fontWeight: "600",
+        },
+        headerShown: true,
       }}
+      tabBar={(props) => <CustomTabBar {...props} />}
     >
       <Tabs.Screen
         name="(home)"
         options={{
           title: "Home",
+          headerTitle: "Home",
         }}
       />
       <Tabs.Screen
         name="(users)"
         options={{
-          title: "Profile",
+          title: "Users",
+          headerTitle: "Users",
         }}
       />
       <Tabs.Screen
         name="(settings)"
         options={{
           title: "Settings",
+          headerTitle: "Settings",
         }}
       />
     </Tabs>

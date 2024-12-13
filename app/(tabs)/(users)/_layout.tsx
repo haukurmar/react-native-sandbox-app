@@ -8,6 +8,7 @@ export default function UsersLayout() {
 	return (
 		<Stack
 			screenOptions={{
+				headerShown: false,
 				headerStyle: {
 					backgroundColor: getColor("brand", 500),
 				},
@@ -45,8 +46,12 @@ export default function UsersLayout() {
 						</TouchableOpacity>
 					),
 					headerRight: () => (
-						<TouchableOpacity onPress={() => console.log("Send action triggered")}>
-							<Text style={[styles.headerButton, styles.sendButton]}>
+						<TouchableOpacity
+							onPress={() => console.log("Send action triggered")}
+						>
+							<Text
+								style={[styles.headerButton, styles.sendButton]}
+							>
 								Send
 							</Text>
 						</TouchableOpacity>
