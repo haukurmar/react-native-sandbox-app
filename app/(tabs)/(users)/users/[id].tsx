@@ -1,24 +1,27 @@
-import { View, StyleSheet, ScrollView } from "react-native";
-import { useLocalSearchParams, useNavigation } from "expo-router";
+import { View, ScrollView, StyleSheet } from "react-native";
+import { useLocalSearchParams, useNavigation, useRouter } from "expo-router";
 import { useFetchSingleUser, PersonCardDetails } from "@app/users";
 import { LoadingSpinner, ErrorMessage } from "@app/ui";
 import { useEffect } from "react";
 
 const DetailUserPage = () => {
 	const { id } = useLocalSearchParams<{ id: string }>();
-	const { setOptions } = useNavigation();
+	const navigation = useNavigation();
+	const router = useRouter();
 	const { data: user, isLoading, error } = useFetchSingleUser(id);
 
 	useEffect(() => {
 		if (user) {
-			setOptions({
-				title: `${user.firstName} ${user.lastName}`,
-			});
+			navigation.setOptions({ title: user.firstName });
 		}
-	}, [user, setOptions]);
+	}, [user, navigation]);
 
 	if (isLoading) {
-		return <LoadingSpinner />;
+		return (
+			<View style={styles.container}>
+				<LoadingSpinner />
+			</View>
+		);
 	}
 
 	if (error || !user) {
@@ -28,7 +31,10 @@ const DetailUserPage = () => {
 	return (
 		<View style={styles.container}>
 			<ScrollView contentContainerStyle={styles.scrollContent}>
-				<PersonCardDetails data={user} />
+				<PersonCardDetails
+					data={user}
+					onEmailPress={(email) => router.push("/users/modal/email?email=" + email)}
+				/>
 			</ScrollView>
 		</View>
 	);
@@ -37,11 +43,10 @@ const DetailUserPage = () => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: "#f5f5f5",
+		backgroundColor: "#fff",
 	},
 	scrollContent: {
 		flexGrow: 1,
-		paddingBottom: 24,
 	},
 });
 

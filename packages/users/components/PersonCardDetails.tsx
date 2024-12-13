@@ -1,14 +1,15 @@
 import type { User } from "../userTypes";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { format, parseISO } from "date-fns";
 
 type PersonCardDetailsProps = {
 	data: User;
+	onEmailPress?: (email: string) => void;
 };
 
 const PersonCardDetails = (props: PersonCardDetailsProps) => {
-	const { data: user } = props;
+	const { data: user, onEmailPress } = props;
 
 	return (
 		<View style={styles.card}>
@@ -38,10 +39,15 @@ const PersonCardDetails = (props: PersonCardDetailsProps) => {
 
 			<View style={styles.section}>
 				<Text style={styles.sectionTitle}>Contact Information</Text>
-				<View style={styles.contactItem}>
+				<TouchableOpacity
+					style={styles.contactItem}
+					onPress={() => onEmailPress?.(user.email)}
+				>
 					<Ionicons name="mail-outline" size={20} color="#666" />
-					<Text style={styles.contactText}>{user.email}</Text>
-				</View>
+					<Text style={[styles.contactText, styles.contactLink]}>
+						{user.email}
+					</Text>
+				</TouchableOpacity>
 				{user.phone && (
 					<View style={styles.contactItem}>
 						<Ionicons name="call-outline" size={20} color="#666" />
@@ -134,6 +140,10 @@ const styles = StyleSheet.create({
 		fontSize: 15,
 		color: "#333",
 		marginLeft: 12,
+	},
+	contactLink: {
+		color: "#007bff",
+		textDecorationLine: "underline",
 	},
 });
 
