@@ -1,37 +1,35 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Stack } from "expo-router";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import 'react-native-reanimated';
 
 // Create a QueryClient instance
 const queryClient = new QueryClient();
 
 export default function RootLayout() {
 	return (
-		<QueryClientProvider client={queryClient}>
-			<Stack
-				screenOptions={{
-					headerStyle: {
-						backgroundColor: "#6b13c0",
-					},
-					headerTintColor: "#fff",
-					headerTitleStyle: {
-						fontWeight: "500",
-					},
-				}}
-			>
-				<Stack.Screen
-					name="(tabs)"
-					options={{
+		<GestureHandlerRootView style={{ flex: 1 }}>
+			<QueryClientProvider client={queryClient}>
+				<Stack
+					screenOptions={{
 						headerShown: false,
-						title: "",
 					}}
-				/>
-				<Stack.Screen
-					name="+not-found"
-					options={{
-						title: "Oops! Page not found",
-					}}
-				/>
-			</Stack>
-		</QueryClientProvider>
+				>
+					<Stack.Screen
+						name="(tabs)"
+						options={{
+							headerShown: false,
+							title: "",
+						}}
+					/>
+					<Stack.Screen
+						name="+not-found"
+						options={{
+							title: "Oops! Page not found",
+						}}
+					/>
+				</Stack>
+			</QueryClientProvider>
+		</GestureHandlerRootView>
 	);
 }
