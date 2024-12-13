@@ -94,6 +94,7 @@ const styles = StyleSheet.create({
 		width: 80,
 		height: 80,
 		borderRadius: 40,
+		marginRight: 16,
 	},
 	placeholderImage: {
 		backgroundColor: "#E1E1E1",
@@ -102,12 +103,12 @@ const styles = StyleSheet.create({
 		fontSize: 24,
 		fontWeight: "700",
 		color: "#1a1a1a",
-		marginBottom: 4,
+		marginBottom: 8,
 	},
 	username: {
 		fontSize: 14,
 		color: "#666",
-		marginBottom: 4,
+		marginBottom: 8,
 	},
 	section: {
 		marginBottom: 24,
@@ -116,17 +117,18 @@ const styles = StyleSheet.create({
 		fontSize: 16,
 		fontWeight: "600",
 		color: "#1a1a1a",
-		marginBottom: 12,
+		marginBottom: 16,
 	},
 	bio: {
 		fontSize: 15,
 		color: "#333",
 		lineHeight: 22,
+		marginBottom: 16,
 	},
 	contactItem: {
 		flexDirection: "row",
 		alignItems: "center",
-		marginBottom: 12,
+		marginBottom: 16,
 	},
 	contactText: {
 		fontSize: 15,
