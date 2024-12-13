@@ -1,7 +1,7 @@
-import { PersonCard, useFetchSingleUser } from "@app/users";
+import { View, ActivityIndicator, Text, StyleSheet } from "react-native";
 import { useLocalSearchParams, useNavigation } from "expo-router";
+import { useFetchSingleUser, PersonCardDetails } from "@app/users";
 import { useEffect } from "react";
-import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 
 const DetailUserPage = () => {
 	const { id } = useLocalSearchParams<{ id: string }>();
@@ -9,7 +9,6 @@ const DetailUserPage = () => {
 	const { data: user, isLoading, error } = useFetchSingleUser(id);
 
 	useEffect(() => {
-		// Set appbar title when user data is loaded
 		if (user) {
 			setOptions({
 				title: `${user.firstName} ${user.lastName}`,
@@ -19,31 +18,23 @@ const DetailUserPage = () => {
 
 	if (isLoading) {
 		return (
-			<View style={styles.container}>
+			<View style={[styles.container, styles.centered]}>
 				<ActivityIndicator size="large" color="#6b13c0" />
 			</View>
 		);
 	}
 
-	if (error) {
+	if (error || !user) {
 		return (
-			<View style={styles.container}>
-				<Text>Error loading user</Text>
-			</View>
-		);
-	}
-
-	if (!user) {
-		return (
-			<View style={styles.container}>
-				<Text>User not found</Text>
+			<View style={[styles.container, styles.centered]}>
+				<Text style={styles.errorText}>Failed to load user</Text>
 			</View>
 		);
 	}
 
 	return (
 		<View style={styles.container}>
-			<PersonCard data={user} />
+			<PersonCardDetails data={user} />
 		</View>
 	);
 };
@@ -51,9 +42,16 @@ const DetailUserPage = () => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		padding: 16,
 		backgroundColor: "#f5f5f5",
+	},
+	centered: {
 		justifyContent: "center",
+		alignItems: "center",
+	},
+	errorText: {
+		color: "#666",
+		fontSize: 16,
+		fontWeight: "500",
 	},
 });
 
