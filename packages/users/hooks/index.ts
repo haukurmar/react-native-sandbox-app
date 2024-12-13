@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchUsers } from "../data-layer";
+import { fetchUsers, fetchSingleUser } from "../data-layer";
 
 const useFetchUsers = () => {
 	const { data, error, isLoading } = useQuery({
@@ -10,4 +10,13 @@ const useFetchUsers = () => {
 	return { data, error, isLoading };
 };
 
-export { useFetchUsers };
+const useFetchSingleUser = (id: string) => {
+	const { data, error, isLoading } = useQuery({
+		queryKey: ["user", id],
+		queryFn: () => fetchSingleUser(id),
+	});
+
+	return { data, error, isLoading };
+};
+
+export { useFetchUsers, useFetchSingleUser };
