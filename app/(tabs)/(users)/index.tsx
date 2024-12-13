@@ -1,5 +1,4 @@
-import { PersonCard } from "@app/components/PersonCard";
-import { useFetchUsers } from "@app/users";
+import { PersonCard, useFetchUsers } from "@app/users";
 import { Link } from "expo-router";
 import {
 	ActivityIndicator,

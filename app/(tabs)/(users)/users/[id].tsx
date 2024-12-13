@@ -1,5 +1,4 @@
-import { PersonCard } from "@app/components/PersonCard";
-import { useFetchSingleUser } from "@app/users";
+import { PersonCard, useFetchSingleUser } from "@app/users";
 import { useLocalSearchParams, useNavigation } from "expo-router";
 import { useEffect } from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";

@@ -1,4 +1,4 @@
-import type { User } from "@app/users";
+import type { User } from "../userTypes";
 import { Image, StyleSheet, Text, View } from "react-native";
 
 type PersonCardProps = {
