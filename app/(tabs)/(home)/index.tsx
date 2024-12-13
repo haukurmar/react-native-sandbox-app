@@ -1,11 +1,12 @@
 import { useFetchUsers } from "@app/users";
 import { StyleSheet, Text, View } from "react-native";
+import { getColor } from "@app/ui";
 
 const HomeScreen = () => {
 	const { data, isLoading } = useFetchUsers();
 	return (
 		<View style={styles.container}>
-			<Text>Góðan daginn Haukur</Text>
+			<Text style={styles.title}>Góðan daginn Haukur</Text>
 		</View>
 	);
 };
@@ -13,8 +14,15 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: "#c01383",
+		backgroundColor: getColor("neutral", 100),
+		alignItems: "center",
+		justifyContent: "center",
 		padding: 8,
+	},
+	title: {
+		fontSize: 24,
+		fontWeight: "bold",
+		color: getColor("neutral", 900),
 	},
 });
 

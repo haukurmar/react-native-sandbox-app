@@ -1,21 +1,20 @@
 import { Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-
-// Create a QueryClient instance
+import { getColor } from "@app/ui";
 
 export default function TabsLayout() {
 	return (
 		<Tabs
 			screenOptions={{
 				tabBarStyle: {
-					backgroundColor: "#333",
-					borderTopColor: "#555",
+					backgroundColor: getColor("neutral", 800),
+					borderTopColor: getColor("neutral", 900),
 					height: 65,
 					paddingBottom: 8,
 					paddingTop: 8,
 				},
-				tabBarActiveTintColor: "#fff",
-				tabBarInactiveTintColor: "#ddd",
+				tabBarActiveTintColor: getColor("brand", 300),
+				tabBarInactiveTintColor: getColor("neutral", 400),
 			}}
 		>
 			<Tabs.Screen

@@ -3,3 +3,4 @@ export * from "./hooks";
 export * from "./userTypes";
 export * from "./components/PersonCard";
 export * from "./components/PersonCardDetails";
+export * from "./components/PersonList";
