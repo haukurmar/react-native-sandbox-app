@@ -9,7 +9,7 @@ import {
 	View,
 } from "react-native";
 
-const HomeScreen = () => {
+const UsersScreen = () => {
 	const { data, isLoading } = useFetchUsers();
 	return (
 		<View style={styles.container}>
@@ -43,4 +43,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default HomeScreen;
+export default UsersScreen;

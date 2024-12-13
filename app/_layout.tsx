@@ -19,14 +19,9 @@ export default function RootLayout() {
 				}}
 			>
 				<Stack.Screen
-					name="index"
+					name="(tabs)"
 					options={{
-						title: "Home page",
-					}}
-				/>
-				<Stack.Screen
-					name="users/[id]"
-					options={{
+						headerShown: false,
 						title: "",
 					}}
 				/>
