@@ -1,6 +1,7 @@
-import { View, ActivityIndicator, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { useLocalSearchParams, useNavigation } from "expo-router";
 import { useFetchSingleUser, PersonCardDetails } from "@app/users";
+import { LoadingSpinner, ErrorMessage } from "@app/ui";
 import { useEffect } from "react";
 
 const DetailUserPage = () => {
@@ -17,19 +18,11 @@ const DetailUserPage = () => {
 	}, [user, setOptions]);
 
 	if (isLoading) {
-		return (
-			<View style={[styles.container, styles.centered]}>
-				<ActivityIndicator size="large" color="#6b13c0" />
-			</View>
-		);
+		return <LoadingSpinner />;
 	}
 
 	if (error || !user) {
-		return (
-			<View style={[styles.container, styles.centered]}>
-				<Text style={styles.errorText}>Failed to load user</Text>
-			</View>
-		);
+		return <ErrorMessage message="Failed to load user" />;
 	}
 
 	return (
@@ -43,15 +36,6 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: "#f5f5f5",
-	},
-	centered: {
-		justifyContent: "center",
-		alignItems: "center",
-	},
-	errorText: {
-		color: "#666",
-		fontSize: 16,
-		fontWeight: "500",
 	},
 });
 

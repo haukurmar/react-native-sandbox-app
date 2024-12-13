@@ -1,39 +1,21 @@
 import { PersonCard, useFetchUsers } from "@app/users";
+import { LoadingSpinner, ErrorMessage } from "@app/ui";
 import { Link } from "expo-router";
-import {
-	ActivityIndicator,
-	ScrollView,
-	StyleSheet,
-	Text,
-	TouchableOpacity,
-	View,
-} from "react-native";
+import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 
 const UsersScreen = () => {
 	const { data, isLoading, error } = useFetchUsers();
 
 	if (isLoading) {
-		return (
-			<View style={[styles.container, styles.centered]}>
-				<ActivityIndicator size="large" color="#fff" />
-			</View>
-		);
+		return <LoadingSpinner />;
 	}
 
 	if (error) {
-		return (
-			<View style={[styles.container, styles.centered]}>
-				<Text style={styles.errorText}>Error loading users</Text>
-			</View>
-		);
+		return <ErrorMessage message="Error loading users" />;
 	}
 
 	if (!data?.length) {
-		return (
-			<View style={[styles.container, styles.centered]}>
-				<Text style={styles.errorText}>No users found</Text>
-			</View>
-		);
+		return <ErrorMessage message="No users found" />;
 	}
 
 	return (
@@ -60,15 +42,6 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: "#964fda",
 		padding: 8,
-	},
-	centered: {
-		justifyContent: "center",
-		alignItems: "center",
-	},
-	errorText: {
-		color: "#fff",
-		fontSize: 16,
-		fontWeight: "500",
 	},
 });
 
