@@ -51,13 +51,13 @@ const getLabel = (routeName: string, defaultLabel: string) => {
     .replace(/^\w/, c => c.toUpperCase());
 };
 
-export default function TabBarButton({
+const TabBarButton = ({
   isFocused,
   onPress,
   onLongPress,
   routeName,
   label,
-}: TabBarButtonProps) {
+}: TabBarButtonProps) => {
   const scale = useSharedValue(1);
   const opacity = useSharedValue(0.6);
 
@@ -97,7 +97,7 @@ export default function TabBarButton({
       </Animated.View>
     </Pressable>
   );
-}
+};
 
 const styles = StyleSheet.create({
   tabButton: {
@@ -120,3 +120,5 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
 });
+
+export default TabBarButton;

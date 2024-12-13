@@ -20,11 +20,11 @@ const SPRING_CONFIG = {
   restSpeedThreshold: 0.01,
 };
 
-export default function CustomTabBar({
+const CustomTabBar = ({
   state,
   descriptors,
   navigation,
-}: BottomTabBarProps) {
+}: BottomTabBarProps) => {
   const translateX = useSharedValue(0);
 
   useEffect(() => {
@@ -87,7 +87,7 @@ export default function CustomTabBar({
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -121,3 +121,5 @@ const styles = StyleSheet.create({
     borderRadius: 28,
   },
 });
+
+export default CustomTabBar;
