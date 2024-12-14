@@ -4,8 +4,9 @@
     "strict": true,
     "paths": {
       "@app/*": ["./*"],
-      "@app/users": ["packages/users/index"],
-      "@app/ui": ["packages/ui/index"]
+      "@app/ui": ["./packages/ui/index"],
+      "@app/users": ["./packages/users/index"],
+      "@app/auth": ["./packages/auth/index"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"]
