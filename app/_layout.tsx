@@ -2,7 +2,7 @@ import { Stack } from "expo-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import 'react-native-reanimated';
-import { ScrollProvider } from "./context/ScrollContext";
+import { ScrollProvider } from "@app/common";
 import { AuthProvider } from "@app/auth";
 
 // Create a QueryClient instance

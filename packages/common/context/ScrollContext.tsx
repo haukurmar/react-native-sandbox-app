@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect } from "react";
-import { SharedValue, useSharedValue, withTiming } from "react-native-reanimated";
+import { SharedValue, useSharedValue } from "react-native-reanimated";
 import { usePathname } from "expo-router";
 
 interface ScrollContextType {

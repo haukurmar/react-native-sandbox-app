@@ -6,7 +6,8 @@
       "@app/*": ["./*"],
       "@app/ui": ["./packages/ui/index"],
       "@app/users": ["./packages/users/index"],
-      "@app/auth": ["./packages/auth/index"]
+      "@app/auth": ["./packages/auth/index"],
+      "@app/common": ["./packages/common/index"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"]

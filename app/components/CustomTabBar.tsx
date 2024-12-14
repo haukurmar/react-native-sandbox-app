@@ -8,7 +8,7 @@ import Animated, {
 	withTiming,
 } from "react-native-reanimated";
 import { useEffect } from "react";
-import { useScrollContext } from "@app/app/context/ScrollContext";
+import { useScrollContext } from "@app/common";
 
 const { width: SCREEN_WIDTH } = Dimensions.get("window");
 const TAB_BAR_WIDTH = Math.min(280, SCREEN_WIDTH - 32);

@@ -1,0 +1,14 @@
+{
+  "name": "@app/common",
+  "version": "0.0.0",
+  "main": "index.ts",
+  "types": "index.ts",
+  "dependencies": {
+    "react-native-reanimated": "*",
+    "expo-router": "*"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  }
+}

@@ -2,10 +2,13 @@ import { useFetchUsers } from "@app/users";
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from "react-native";
 import { getColor } from "@app/ui";
 import { useAuth } from "@app/auth";
+import { jwtDecode } from "jwt-decode";
 
 const HomeScreen = () => {
 	const { data, isLoading } = useFetchUsers();
 	const { isAuthenticated, login, logout, accessToken } = useAuth();
+
+	const decodedToken = accessToken ? jwtDecode(accessToken) : null;
 
 	return (
 		<ScrollView style={styles.container}>
@@ -21,10 +24,21 @@ const HomeScreen = () => {
 				</TouchableOpacity>
 
 				{isAuthenticated && (
-					<View style={styles.tokenContainer}>
-						<Text style={styles.tokenTitle}>Access Token:</Text>
-						<Text style={styles.tokenText}>{accessToken}</Text>
-					</View>
+					<>
+						<View style={styles.tokenContainer}>
+							<Text style={styles.tokenTitle}>Access Token:</Text>
+							<Text style={styles.tokenText} numberOfLines={3}>
+								{accessToken}
+							</Text>
+						</View>
+
+						<View style={styles.tokenContainer}>
+							<Text style={styles.tokenTitle}>Decoded Token:</Text>
+							<Text style={styles.tokenText}>
+								{JSON.stringify(decodedToken, null, 2)}
+							</Text>
+						</View>
+					</>
 				)}
 			</View>
 		</ScrollView>
@@ -40,7 +54,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: "center",
 		padding: 16,
-		paddingTop: 40,
+		paddingTop: 48,
 	},
 	title: {
 		fontSize: 24,
@@ -66,6 +80,7 @@ const styles = StyleSheet.create({
 		padding: 16,
 		borderRadius: 8,
 		width: "100%",
+		marginBottom: 16,
 	},
 	tokenTitle: {
 		fontSize: 16,
