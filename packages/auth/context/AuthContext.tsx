@@ -24,15 +24,22 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [refreshToken, setRefreshToken] = useState<string | null>(null);
 
   useEffect(() => {
-    // Load tokens from secure storage on startup
-    const loadTokens = async () => {
+    // Clean up any existing auth sessions and load tokens
+    const init = async () => {
+      try {
+        await WebBrowser.coolDownAsync();
+      } catch (error) {
+        console.log('Error cleaning up initial browser session:', error);
+      }
+
+      // Load tokens from secure storage
       const storedAccessToken = await SecureStore.getItemAsync('accessToken');
       const storedRefreshToken = await SecureStore.getItemAsync('refreshToken');
       setAccessToken(storedAccessToken);
       setRefreshToken(storedRefreshToken);
     };
 
-    loadTokens();
+    init();
   }, []);
 
   const discovery = {
@@ -43,6 +50,14 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const login = async () => {
     try {
       console.log('Starting login process...');
+      
+      // Clean up any existing browser sessions
+      try {
+        await WebBrowser.coolDownAsync();
+      } catch (error) {
+        console.log('Error cooling down browser:', error);
+      }
+
       const request = new AuthRequest({
         clientId: AuthConfig.clientId,
         scopes: [...AuthConfig.scopes],
@@ -51,9 +66,19 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         responseType: ResponseType.Code
       });
 
-      console.log('Auth request created, opening browser...');
-      const result = await request.promptAsync(discovery);
-      console.log('Auth result:', JSON.stringify(result, null, 2));
+      console.log('Auth request created with config:', {
+        clientId: AuthConfig.clientId,
+        redirectUri: AuthConfig.redirectUri,
+        scopes: AuthConfig.scopes
+      });
+
+      console.log('Opening browser...');
+      const result = await request.promptAsync(discovery, {
+        showInRecents: true,
+        preferEphemeralSession: true
+      });
+      
+      console.log('Browser result:', result);
 
       if (result.type === 'success' && result.params.code) {
         console.log('Received auth code, exchanging for tokens...');
@@ -67,13 +92,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           }
         }, discovery);
 
-        console.log('Token response:', JSON.stringify({
-          accessToken: tokenResponse.accessToken.substring(0, 20) + '...',
-          tokenType: tokenResponse.tokenType,
-          expiresIn: tokenResponse.expiresIn,
-          refreshToken: tokenResponse.refreshToken ? '(present)' : '(not present)',
-          scope: tokenResponse.scope,
-        }, null, 2));
+        console.log('Token response received');
 
         // Store tokens securely
         await SecureStore.setItemAsync('accessToken', tokenResponse.accessToken);
@@ -84,28 +103,43 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         setAccessToken(tokenResponse.accessToken);
         setRefreshToken(tokenResponse.refreshToken || null);
         console.log('Login process completed successfully!');
+      } else {
+        console.log('Login failed or was cancelled:', result.type);
       }
     } catch (error) {
       console.error('Login error:', error);
+      // Try to clean up browser session on error
+      try {
+        await WebBrowser.coolDownAsync();
+      } catch (cleanupError) {
+        console.log('Error cleaning up browser:', cleanupError);
+      }
     }
   };
 
   const logout = async () => {
     try {
-      // Clear tokens from secure storage
+      // Clear tokens from secure storage first
       await SecureStore.deleteItemAsync('accessToken');
       await SecureStore.deleteItemAsync('refreshToken');
       
       setAccessToken(null);
       setRefreshToken(null);
 
-      // Redirect to end session endpoint
-      await WebBrowser.openAuthSessionAsync(
-        `${AuthConfig.endSessionEndpoint}?post_logout_redirect_uri=${AuthConfig.postLogoutRedirectUri}`,
-        AuthConfig.postLogoutRedirectUri
-      );
+      // Construct logout URL with post_logout_redirect_uri and state
+      const returnUrl = encodeURIComponent(AuthConfig.postLogoutRedirectUri);
+      const state = encodeURIComponent(Date.now().toString());
+      const logoutUrl = `${AuthConfig.endSessionEndpoint}?post_logout_redirect_uri=${returnUrl}&state=${state}`;
+
+      // Open logout URL in browser
+      const result = await WebBrowser.openBrowserAsync(logoutUrl);
+      console.log('Logout browser result:', result);
+
+      // Clean up browser session
+      await WebBrowser.coolDownAsync();
     } catch (error) {
       console.error('Logout error:', error);
+      await WebBrowser.coolDownAsync();
     }
   };
 
