@@ -1,15 +1,11 @@
 import { PersonCard } from "./PersonCard";
-import { LoadingSpinner, ErrorMessage } from "@app/ui";
+import { ErrorMessage } from "@app/ui";
 import { Link } from "expo-router";
 import { TouchableOpacity } from "react-native";
 import { useFetchUsers } from "../hooks";
 
 export const PersonList = () => {
-	const { data, isLoading, error } = useFetchUsers();
-
-	if (isLoading) {
-		return <LoadingSpinner />;
-	}
+	const { data, error } = useFetchUsers();
 
 	if (error) {
 		return <ErrorMessage message="Error loading users" />;
